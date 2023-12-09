@@ -2,7 +2,13 @@ require('dotenv').config()
 
 const express = require('express');
 const app = express();
-var http = require("http").Server(app)
+const mongoose = require('mongoose');
+var http = require("http").Server(app);
+var dbUrl = `mongodb+srv://${process.env.USER}:${process.env.PASS}@campfirecluster.ty4xcsz.mongodb.net/?retryWrites=true&w=majority`;
+
+mongoose.connect(dbUrl, (err) => {
+    console.log('mongodb connected', err);
+});
 
 const io = require('socket.io')(http);
 
